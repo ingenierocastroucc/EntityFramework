@@ -1,4 +1,13 @@
+using CampusVirtualWeb.Context;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AsignaturaContext>(p => p.UseInMemoryDatabase("AsignaturasDb"));
+
+builder.Services.AddSqlServer<AsignaturaContext>("");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,6 +28,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapGet("/dbconexion", async ([FromServices] AsignaturaContext dbContext) =>
+    {
+        dbContext.Database.EnsureCreated();
+        return Results.Ok("Base de datos en memoria: " + dbContext.Database.IsInMemory());
+    });
 
 app.MapControllerRoute(
     name: "default",
