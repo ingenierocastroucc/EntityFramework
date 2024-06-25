@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddDbContext<AsignaturaContext>(p => p.UseInMemoryDatabase("AsignaturasDb"));
 
-builder.Services.AddSqlServer<AsignaturaContext>("Data Source=LAPTOP-PH1R9POH;Initial Catalog=CampusVirtualDb;Integrated Security=True;");
+builder.Services.AddSqlServer<AsignaturaContext>(builder.Configuration.GetConnectionString("ConecctionCampusVirtual"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
