@@ -12,17 +12,14 @@ namespace CampusVirtualWeb.Models
         private string NombreFinal { get; set; }
 
         [Required]
-        public int IdAsignatura { get; set; }
-
-        [Required]
         [MaxLength(100, ErrorMessage = "Supera el numero de 100 caracteres permitidos"), MinLength(5, ErrorMessage = "Es inferior al numero minimo de 5 caracteres permitidos")]
         public string Nombre { get { return NombreFinal; } set { NombreFinal = value.Trim(); } }
 
         public string Nivelacion { get; set; }
 
-        [Required, ConcurrencyCheck]
+        [Required]
         public int Horario { get; set; }
 
-        public virtual Asignaturas AsignaturasVirtual { get; set; }
+        public virtual ICollection<Asignaturas> AsignaturasVirtual { get; set; }
     }
 }

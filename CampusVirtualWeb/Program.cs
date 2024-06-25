@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AsignaturaContext>(p => p.UseInMemoryDatabase("AsignaturasDb"));
+//builder.Services.AddDbContext<AsignaturaContext>(p => p.UseInMemoryDatabase("AsignaturasDb"));
 
-builder.Services.AddSqlServer<AsignaturaContext>("");
+builder.Services.AddSqlServer<AsignaturaContext>("Data Source=LAPTOP-PH1R9POH;Initial Catalog=CampusVirtualDb;Integrated Security=True;");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

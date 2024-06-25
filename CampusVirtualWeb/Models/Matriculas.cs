@@ -31,7 +31,6 @@ namespace CampusVirtualWeb.Models
 
         public DateTime FechaRegistro { get; set; }
 
-        [NotMapped]
         public virtual ICollection<Asignaturas> AsignaturasVirtual { get; set; }
     }
 
