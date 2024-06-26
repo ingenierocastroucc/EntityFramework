@@ -4,22 +4,16 @@ namespace CampusVirtualWeb.Models
 {
     public class Asignaturas
     {
-        [Key]
         public Guid AsignaturaId { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        private string NombreFinal { get; set; }
+        public string NombreAsignatura { get; set; }
 
-        [Required]
-        [MaxLength(100, ErrorMessage = "Supera el numero de 100 caracteres permitidos"), MinLength(5, ErrorMessage = "Es inferior al numero minimo de 5 caracteres permitidos")]
-        public string Nombre { get { return NombreFinal; } set { NombreFinal = value.Trim(); } }
+        public string Nombre { get { return NombreAsignatura; } set { NombreAsignatura = value.Trim(); } }
 
         public string Nivelacion { get; set; }
 
-        [Required]
         public int Horario { get; set; }
 
-        public virtual ICollection<Asignaturas> AsignaturasVirtual { get; set; }
+        public virtual ICollection<Matriculas> MatriculaVirtual { get; set; }
     }
 }
