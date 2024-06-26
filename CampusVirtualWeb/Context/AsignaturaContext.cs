@@ -20,6 +20,7 @@ namespace CampusVirtualWeb.Context
                 asignaturas.Property(p => p.NombreAsignatura).IsRequired().HasMaxLength(100);
                 asignaturas.Ignore(p => p.Nombre);
                 asignaturas.Property(p => p.Horario).IsRequired();
+                asignaturas.Property(p => p.ProfesorAsignatura).IsRequired().HasMaxLength(100);
             }
             );
             modelBuilder.Entity<Matriculas>(matriculas =>

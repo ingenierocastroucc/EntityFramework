@@ -12,6 +12,8 @@ namespace CampusVirtualWeb.Models
 
         public string Nivelacion { get; set; }
 
+        public string ProfesorAsignatura { get; set; }
+
         public int Horario { get; set; }
 
         public virtual ICollection<Matriculas> MatriculaVirtual { get; set; }

@@ -4,6 +4,7 @@ using CampusVirtualWeb.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampusVirtualWeb.Migrations
 {
     [DbContext(typeof(AsignaturaContext))]
-    partial class AsignaturaContextModelSnapshot : ModelSnapshot
+    [Migration("20240626232452_ColumnProfesorAsignatura")]
+    partial class ColumnProfesorAsignatura
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
