@@ -16,6 +16,8 @@ namespace CampusVirtualWeb.Models
 
         public int Horario { get; set; }
 
+        public DateTime FechaRegistro { get; set; }
+
         public virtual ICollection<Matriculas> MatriculaVirtual { get; set; }
     }
 }
