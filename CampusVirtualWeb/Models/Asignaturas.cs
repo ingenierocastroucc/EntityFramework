@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CampusVirtualWeb.Models
 {
@@ -18,6 +19,7 @@ namespace CampusVirtualWeb.Models
 
         public DateTime FechaRegistro { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Matriculas> MatriculaVirtual { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using CampusVirtualWeb.Context;
+using CampusVirtualWeb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,34 @@ app.MapGet("/dbconexion", async ([FromServices] AsignaturaContext dbContext) =>
         dbContext.Database.EnsureCreated();
         return Results.Ok("Base de datos en memoria: " + dbContext.Database.IsInMemory());
     });
+
+app.MapGet("/api/asignaturas", async ([FromServices] AsignaturaContext dbContext) =>
+{
+    dbContext.Database.EnsureCreated();
+    return Results.Ok(dbContext.MatriculaVirtual.Include(p=>p.AsignaturasVirtual).Where(p => p.NombreAsignatura == "Programacion"));
+});
+
+app.MapPost("/api/asignaturasregistro", async ([FromServices] AsignaturaContext dbContext, [FromBody] Asignaturas asignaturas) =>
+{
+    asignaturas.AsignaturaId = Guid.NewGuid();
+    asignaturas.FechaRegistro = DateTime.Now;
+    await dbContext.AddAsync(asignaturas);
+
+    await dbContext.SaveChangesAsync();
+
+    return Results.Ok();
+});
+
+app.MapPost("/api/matricularegistro", async ([FromServices] AsignaturaContext dbContext, [FromBody] Matriculas matriculas) =>
+{
+    matriculas.MatriculaId = Guid.NewGuid();
+    matriculas.FechaRegistro = DateTime.Now;
+    await dbContext.AddAsync(matriculas);
+
+    await dbContext.SaveChangesAsync();
+
+    return Results.Ok();
+});
 
 app.MapControllerRoute(
     name: "default",
