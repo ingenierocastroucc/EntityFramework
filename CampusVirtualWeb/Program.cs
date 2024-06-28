@@ -84,6 +84,22 @@ app.MapPut("/api/actualizacionasignatura/{id}", async ([FromServices] Asignatura
     return Results.NotFound();
 });
 
+app.MapDelete("/api/eleiminacionmatricula/{id}", async ([FromServices] AsignaturaContext dbContext, [FromRoute] Guid id) =>
+{
+    var matriculaVirtual = dbContext.MatriculaVirtual.Find(id);
+
+    if (matriculaVirtual != null)
+    {
+
+        dbContext.Remove(matriculaVirtual);
+        await dbContext.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
