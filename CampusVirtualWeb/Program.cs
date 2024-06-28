@@ -39,7 +39,7 @@ app.MapGet("/dbconexion", async ([FromServices] AsignaturaContext dbContext) =>
 app.MapGet("/api/asignaturas", async ([FromServices] AsignaturaContext dbContext) =>
 {
     dbContext.Database.EnsureCreated();
-    return Results.Ok(dbContext.MatriculaVirtual.Include(p=>p.AsignaturasVirtual).Where(p => p.NombreAsignatura == "Programacion"));
+    return Results.Ok(dbContext.MatriculaVirtual.Include(p=>p.AsignaturasVirtual).Where(p => p.NombreAsignatura == "SQL"));
 });
 
 app.MapPost("/api/asignaturasregistro", async ([FromServices] AsignaturaContext dbContext, [FromBody] Asignaturas asignaturas) =>
@@ -62,6 +62,26 @@ app.MapPost("/api/matricularegistro", async ([FromServices] AsignaturaContext db
     await dbContext.SaveChangesAsync();
 
     return Results.Ok();
+});
+
+app.MapPut("/api/actualizacionasignatura/{id}", async ([FromServices] AsignaturaContext dbContext, [FromBody] Asignaturas asignaturas, [FromRoute] Guid id) =>
+{
+    var asignaturaActual = dbContext.AsignaturasVirtual.Find(id);
+
+    if (asignaturaActual != null)
+    {
+        asignaturaActual.NombreAsignatura = asignaturas.NombreAsignatura;
+        asignaturaActual.Nombre = asignaturas.Nombre;
+        asignaturaActual.Nivelacion = asignaturas.Nivelacion;
+        asignaturaActual.ProfesorAsignatura = asignaturas.ProfesorAsignatura;
+        asignaturaActual.Horario = asignaturas.Horario;
+
+        await dbContext.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
 });
 
 app.MapControllerRoute(
