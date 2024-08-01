@@ -16,5 +16,5 @@ Contiene codigo C# para EntityFramework:
 * EntityFramework
 
 
-Resibira actualizaciones semanales o diarias: **Este readme.md se realiza con la finalidad de informar**.
+Recibira actualizaciones semanales o diarias: **Este readme.md se realiza con la finalidad de informar**.
 
